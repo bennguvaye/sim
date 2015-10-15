@@ -1,0 +1,41 @@
+Name: SIM
+Version: 0.1
+Synopsis: Simulation of deterministic and stochastic systems
+Authors: Benjamin Nguyen-Van-Yen <benjamin.nguyen-van-yen@ens.fr>
+License: LGPL with OCaml linking exception
+Description: Provides multiple algorithms for simulating
+  deterministic (dynamical systems) or stochastic (Markov processes) systems.
+
+OASISFormat: 0.4
+BuildTools: ocamlbuild
+Plugins: META (0.4), DevFiles (0.4)
+
+Library sim
+  Path: src
+  Modules: Basic, Dopri5, Gill, Hj_leap, Poisson_v1, Euler_multinomial 
+  BuildDepends: csv, lacaml, expr
+  NativeOpt: -p
+
+Executable ex_hjl
+  Path: src
+  MainIs: ex_hjl.ml
+  BuildDepends: sim
+  CompiledObject: native
+  NativeOpt: -p
+  Install: false
+
+Executable ex_pv1
+  Path: src
+  MainIs: ex_pv1.ml
+  BuildDepends: sim
+  CompiledObject: native
+  NativeOpt: -p
+  Install: false
+
+Document API
+  Title:  API reference for Sim
+  Type: OCamlbuild
+  InstallDir: $docdir/api
+  BuildTools: ocamldoc, ocamlbuild
+  XOCamlbuildPath: .
+  XOCamlBuildLibraries: sim
